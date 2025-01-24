@@ -1,0 +1,48 @@
+version: "0.0.1"
+
+metadata:
+  name: "notes-maker"
+  description: "Generates summarized and organized notes from input text"
+  author: "shameerbashashaik"
+  tags: ["notes", "summarization", "organization"]
+  private: false
+
+inputs:
+  text:
+    type: string
+    description: "The raw content or text to be summarized and organized"
+    required: true
+    example: "The quick brown fox jumps over the lazy dog."
+  format:
+    type: string
+    description: "The desired format for the notes (e.g., bullet points, paragraphs, etc.)"
+    required: true
+    example: "bullet points"
+  detail_level:
+    type: string
+    description: "The level of detail required in the notes (e.g., high-level, detailed)"
+    required: true
+    example: "high-level"
+
+model:
+  provider: "openai"
+  name: "gpt-3.5-turbo"
+
+prompt: |
+  You are an expert note-taker. Given the following text, create well-organized notes with the following preferences:
+  
+  Text: {text}
+  Format: {format}
+  Detail Level: {detail_level}
+
+  Provide:
+  - A concise summary of the key points
+  - Organize the information in the preferred format (e.g., bullet points, paragraphs)
+  - Maintain a balance between clarity and brevity
+  - Ensure that the notes are easy to understand and read
+  
+  Consider:
+  - Ensure the notes are clear and structured
+  - Avoid unnecessary repetition
+  - Prioritize key concepts and ideas
+  - Adapt to the preferred detail level
