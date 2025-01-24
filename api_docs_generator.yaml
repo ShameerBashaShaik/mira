@@ -1,0 +1,48 @@
+version: "0.0.1"
+
+metadata:
+  name: "notes-maker"
+  description: "Generates organized and summarized notes from input text"
+  author: "shameerbashashaik"
+  tags: ["notes", "summarization", "organization"]
+  private: false
+
+inputs:
+  text:
+    type: string
+    description: "The raw content or text to be summarized and organized"
+    required: true
+    example: "The quick brown fox jumps over the lazy dog."
+  format:
+    type: string
+    description: "The preferred format for the notes (e.g., bullet points, paragraphs)"
+    required: true
+    example: "bullet points"
+  detail_level:
+    type: string
+    description: "The level of detail required for the notes (e.g., high-level, detailed)"
+    required: true
+    example: "high-level"
+
+model:
+  provider: "anthropic"
+  name: "claude-3.5-sonnet"
+
+prompt: |
+  You are an expert note-maker. Given the following text, generate well-organized and summarized notes with the following preferences:
+
+  Text: {text}
+  Format: {format}
+  Detail Level: {detail_level}
+
+  Include:
+  1. Concise summary of the main points
+  2. Organized information in the preferred format (e.g., bullet points, paragraphs)
+  3. Clear and structured language
+  4. Maintain a balance between brevity and clarity
+
+  Consider:
+  - The level of detail (high-level or detailed)
+  - Avoid unnecessary repetition
+  - Focus on the key concepts and ideas
+  - Make sure the notes are easy to read and understand
